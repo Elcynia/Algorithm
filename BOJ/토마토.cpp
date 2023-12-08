@@ -20,7 +20,7 @@ int main(void) {
   ios::sync_with_stdio(0);
   cin.tie(0);
   int ans = 0;
-  cin >> m >> n;
+  cin >> n >> m;
   queue<pair<int, int> > Q;
 
   for (int i = 0; i < m; i++) {
