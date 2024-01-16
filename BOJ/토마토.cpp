@@ -11,8 +11,8 @@ using namespace std;
 */
 
 int n, m, h;
-int board[102][102][102];
-int dist[102][102][102];
+int board[102][102][102] = {};
+int dist[102][102][102] = {};
 // 하-우-상-좌-전-후
 int dx[6] = {1, 0, -1, 0, 0, 0};
 int dy[6] = {0, 1, 0, -1, 0, 0};
@@ -23,7 +23,8 @@ void bfs() {
   while (!Q.empty()) {
     int curX, curY, curZ;
     tie(curZ, curY, curX) = Q.front();
-    // cout << curZ << ' ' << curY << ' ' << curZ << ' ' << endl;
+    // cout << '(' << curY << ',' << curX << ')' << endl;
+    // cout << board[curZ][curY][curX] << endl;
     Q.pop();
 
     for (int i = 0; i < 6; i++) {
@@ -32,10 +33,11 @@ void bfs() {
       int nz = curZ + dz[i];
 
       if (nx < 0 || ny < 0 || nz < 0 || nx >= m || ny >= n || nz >= h) continue;
-      cout << dist[nz][ny][nx];
       if (dist[nz][ny][nx] >= 0) continue;
 
+      // cout << dist[curZ][curY][curX] << endl;
       dist[nz][ny][nx] = dist[curZ][curY][curX] + 1;
+      // cout << dist[nz][ny][nx] << endl;
       Q.push({nz, ny, nx});
     }
   }
