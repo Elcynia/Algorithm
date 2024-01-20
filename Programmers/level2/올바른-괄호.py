@@ -1,7 +1,20 @@
-def solution(s):
-    answer = True
-    
-    # [실행] 버튼을 누르면 출력 값을 볼 수 있습니다.
-    print('Hello Python')
+s = ")()("
 
-    return True
+def solution(s):
+    cnt = 0
+    answer = 0
+    for i in list(s):
+        if (i == '('):
+            cnt += 1
+        elif (i == ')'):
+            cnt -= 1
+            if (cnt < 0):
+                print(False)
+                return False
+    if (cnt == 0):
+        print(True)
+        return True
+    else:
+        print(False)
+        return False
+solution(s)
