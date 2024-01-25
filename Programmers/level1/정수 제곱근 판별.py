@@ -4,5 +4,4 @@ def solution(n):
     else: return -1
 
 
-
 print(solution(121))
