@@ -1,10 +1,9 @@
 import sys
-sys.stdin = open('./input.txt', 'r')
-
-
+# sys.stdin = open('./input.txt', 'rt')
 if __name__ == "__main__":
-  n = input()
-  score = sorted(list(map(float, input().split(' '))), reverse=True)
-  # print (score[1]/score[0]*100)
-  # print (score)
-  print (1/100*100)
+  n = int(input())
+  arr = list(map(float, input().split()))
+  new = [score / max(arr) * 100 for score in arr]
+  average = sum(new) / n
+  print("%.2f"%average)
+  
