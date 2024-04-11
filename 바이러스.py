@@ -1,6 +1,5 @@
 import sys
 sys.stdin = open('./input.txt', 'r')
-
 def DFS(idx):
     global visited, ans, graph
     visited[idx] = 1
@@ -12,7 +11,6 @@ def DFS(idx):
 n = int(sys.stdin.readline()) # pc 개수
 m = int(sys.stdin.readline()) # 연결된 pc 쌍의 개수
 graph = [[0]*(n+1) for _ in range(n+1)]
-print (graph)
 visited = [0]*(n+1)
 ans = 0
 
@@ -23,5 +21,3 @@ for _ in range(m):
 
 DFS(1)
 print (ans - 1)
-
-

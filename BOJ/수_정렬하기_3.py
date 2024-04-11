@@ -11,4 +11,4 @@ for _ in range(n):
 for i in range(10001):  # 1만까지 숫자를 확인하며
     if arr[i] != 0:  # 해당 숫자가 0이 아니면
         for _ in range(arr[i]):  # 해당 숫자의 개수만큼 출력
-            print(i)
+            print(i) 

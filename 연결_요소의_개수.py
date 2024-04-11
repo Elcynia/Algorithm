@@ -7,8 +7,9 @@ def DFS(idx):
     global visited, graph
     visited[idx] = 1
     for i in range(1, n+1):
-        if not visited[i] and graph[idx][i]:
+        if not visited[i] and graph[idx][i] == 1:
             DFS(i)
+
 graph = [[0]*(n+1) for _ in range(n+1)]
 visited = [0]*(n+1)
 ans = 0
