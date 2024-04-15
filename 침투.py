@@ -1,5 +1,5 @@
 import sys
-#sys.stdin = open('./input.txt', 'r')
+sys.stdin = open('./input.txt', 'r')
 sys.setrecursionlimit(10**6)
 input = sys.stdin.readline
 
@@ -10,7 +10,6 @@ def DFS(y, x):
     return
     
   visited[y][x] = 1
-
   for i in range(4):
     ny = y + dy[i]
     nx = x + dx[i]
@@ -44,5 +43,5 @@ if (res == 1):
 else:
   print ("NO")
 
-# for i in board:
-#   print (i)
+for i in board:
+  print (i)
