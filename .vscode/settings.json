@@ -1,4 +1,7 @@
 {
   "cSpell.ignoreWords": ["setrecursionlimit"],
-  "cSpell.words": ["appendleft", "jihun", "popleft", "sanggeun"]
+  "cSpell.words": ["appendleft", "jihun", "popleft", "sanggeun"],
+  "material-icon-theme.folders.associations": {
+    "스트릭 대비용(미제출)": "api"
+  }
 }
