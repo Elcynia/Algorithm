@@ -7,6 +7,10 @@ for _ in range(T):
   n = int(input())
   arr = [list(map(int, input().split())) for _ in range(2)]
   dp = [[0] * (n+1) for _ in range(2)]
+  
+  if n == 1:
+    print(max(arr[0][0], arr[1][0]))
+    continue
   # 초기값 설정
   dp[0][0], dp[1][0] = arr[0][0], arr[1][0]
   dp[0][1] = arr[1][0] + arr[0][1]
