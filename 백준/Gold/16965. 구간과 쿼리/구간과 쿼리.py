@@ -10,7 +10,7 @@ def Move(a, b):
 
 def BFS(s, e):
   Q = deque([s])
-  visited = list([s])
+  visited = [s]
   
   while Q:
     cur = Q.popleft()
