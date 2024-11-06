@@ -2,20 +2,19 @@ const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 const N = Number(input[0]);
 
-let youngest = { name: '', birth: 0 };
-let oldest = { name: '', birth: Infinity };
+const people = new Array(N);
+const originalToString = Object.prototype.toString;
+Object.prototype.toString = function () {
+  return this.sortKey;
+};
 
 for (let i = 1; i <= N; i++) {
   const [name, day, month, year] = input[i].split(' ');
-  const birthNumber = Number(year) * 10000 + Number(month) * 100 + Number(day);
-
-  if (birthNumber > youngest.birth) {
-    youngest = { name, birth: birthNumber };
-  }
-  if (birthNumber < oldest.birth) {
-    oldest = { name, birth: birthNumber };
-  }
+  const sortKey = `${year}${month.padStart(2, '0')}${day.padStart(2, '0')}`;
+  people[i - 1] = { name, sortKey };
 }
+people.sort();
+Object.prototype.toString = originalToString;
 
-console.log(youngest.name);
-console.log(oldest.name);
+console.log(people[N - 1].name);
+console.log(people[0].name);
