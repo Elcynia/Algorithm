@@ -1,20 +1,19 @@
-const fs = require('fs');
-const [n, m] = fs.readFileSync(0).toString().trim().split(' ').map(BigInt);
+let [n, m] = require("fs")
+  .readFileSync("./dev/stdin")
+  .toString()
+  .trim()
+  .split(" ")
+  .map((v) => Number(v))
 
-function main() {
-  if (n > m) {
-    console.log(0);
-  } else {
-    if (n === 1n) {
-      console.log(1);
-    } else {
-      let fact = 1n;
-      for (let i = 2n; i <= n; i++) {
-        fact = (fact * i) % m;
-      }
-      console.log(fact.toString());
-    }
+function factorialMod(n, m) {
+  let result = 1
+
+  for (let i = 1; i <= n; i++) {
+    result *= i
+    result %= m
   }
-}
 
-main();
+  return result
+}
+if (n >= m) console.log(0)
+else console.log(factorialMod(n, m))
