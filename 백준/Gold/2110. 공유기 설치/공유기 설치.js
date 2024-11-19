@@ -6,7 +6,7 @@ const x = input
   .map(Number)
   .sort((a, b) => a - b);
 let left = 1;
-let right = x.at(-1) - x[0];
+let right = x[N - 1] - x[0];
 let result = 0;
 
 function wireless(dist) {
