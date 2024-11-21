@@ -1,5 +1,3 @@
-const fs = require('fs');
-
 function sumDigits(num, base) {
   let sum = 0;
   while (num > 0) {
