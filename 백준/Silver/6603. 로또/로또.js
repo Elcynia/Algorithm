@@ -1,34 +1,25 @@
 const fs = require('fs');
-const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
+const input = fs.readFileSync(0).toString().trim().split('\n');
 
-let choose = [];
 let arr, k;
+let r = [];
 
-function comb(idx, lev) {
+function combination(idx, lev) {
   if (lev === 6) {
-    console.log(choose.join(' '));
+    console.log(r.join(' '));
     return;
   }
 
   for (let i = idx; i < k; i++) {
-    choose.push(arr[i]);
-    comb(i + 1, lev + 1);
-    choose.pop();
+    r.push(arr[i]);
+    combination(i + 1, lev + 1);
+    r.pop();
   }
 }
 
-let lineIndex = 0;
-
-while (true) {
-  choose = [];
-  const I = input[lineIndex++].split(' ').map(Number);
-
-  k = I[0];
-  arr = I.slice(1);
-  if (k === 0) {
-    break;
-  }
-
-  comb(0, 0);
+for (let i = 0; i < input.length - 1; i++) {
+  [k, ...arr] = input[i].split(' ').map(Number);
+  if (k === 0) return;
+  combination(0, 0);
   console.log();
 }
