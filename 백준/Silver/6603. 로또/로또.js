@@ -1,34 +1,34 @@
 const fs = require('fs');
-const input = fs.readFileSync(0).toString().trim().split('\n');
-let idx = 0;
+const input = fs.readFileSync('/dev/stdin').toString().trim().split('\n');
 
-function getCombinations(arr, selectNumber) {
-  const results = [];
+let choose = [];
+let arr, k;
 
-  if (selectNumber === 1) {
-    return arr.map((value) => [value]);
+function comb(idx, lev) {
+  if (lev === 6) {
+    console.log(choose.join(' '));
+    return;
   }
 
-  arr.forEach((fixed, idx, origin) => {
-    const rest = origin.slice(idx + 1);
-    const combinations = getCombinations(rest, selectNumber - 1);
-    const attached = combinations.map((combination) => [fixed, ...combination]);
-    results.push(...attached);
-  });
-
-  return results;
+  for (let i = idx; i < k; i++) {
+    choose.push(arr[i]);
+    comb(i + 1, lev + 1);
+    choose.pop();
+  }
 }
 
-while (true) {
-  const numbers = input[idx].split(' ').map(Number);
-  const k = numbers[0];
-  if (k === 0) break;
-  const S = numbers.slice(1);
-  const combinations = getCombinations(S, 6);
+let lineIndex = 0;
 
-  combinations.forEach((combination) => {
-    console.log(combination.join(' '));
-  });
+while (true) {
+  choose = [];
+  const I = input[lineIndex++].split(' ').map(Number);
+
+  k = I[0];
+  arr = I.slice(1);
+  if (k === 0) {
+    break;
+  }
+
+  comb(0, 0);
   console.log();
-  idx++;
 }
