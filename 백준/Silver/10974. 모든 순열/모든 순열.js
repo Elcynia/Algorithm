@@ -6,7 +6,6 @@ let checked = new Array(N).fill(false);
 function permutation(level) {
   if (level === N) {
     console.log(result.join(' '));
-
     return;
   }
 
