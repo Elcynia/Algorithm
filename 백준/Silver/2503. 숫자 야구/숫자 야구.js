@@ -7,15 +7,24 @@ let ans = 0;
 const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 const permutations = [];
 
-for (let i = 0; i < numbers.length; i++) {
-  for (let j = 0; j < numbers.length; j++) {
-    if (j === i) continue;
-    for (let k = 0; k < numbers.length; k++) {
-      if (k === i || k === j) continue;
-      permutations.push([numbers[i], numbers[j], numbers[k]]);
-    }
+function generatePermutation(path, visited) {
+  if (path.length === 3) {
+    permutations.push([...path]);
+    return;
+  }
+
+  for (let i = 0; i < numbers.length; i++) {
+    if (visited[i]) continue;
+
+    visited[i] = true;
+    path.push(numbers[i]);
+    generatePermutation(path, visited);
+    path.pop();
+    visited[i] = false;
   }
 }
+
+generatePermutation([], Array(numbers.length).fill(false));
 
 for (const perm of permutations) {
   let isAnswer = true;
