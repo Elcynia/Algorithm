@@ -6,10 +6,7 @@ let cnt = 1;
 for (let i = 0; i < T; i++) {
   const N = +input[cnt];
   const arr = input[cnt + 1].split(' ').map(Number);
-  let sum = 0;
-  for (let j = 0; j < arr.length; j++) {
-    sum += arr[j];
-  }
+  const sum = (N * (arr[0] + arr.at(-1))) / 2;
   console.log(sum);
   cnt += 2;
 }
