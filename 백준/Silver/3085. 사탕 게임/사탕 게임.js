@@ -1,7 +1,9 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
+const N = parseInt(input[0]);
+const matrix = input.slice(1).map((line) => line.split(''));
 
-const getBest = (y, x, N, matrix) => {
+const getBest = (y, x) => {
   let best = 0;
 
   // 행
@@ -33,24 +35,21 @@ const getBest = (y, x, N, matrix) => {
   return best;
 };
 
-const N = parseInt(input[0]);
-const matrix = input.slice(1).map((line) => line.split(''));
-
 const dy = [-1, 0, 1, 0];
 const dx = [0, 1, 0, -1];
 
-let ans = 0;
+let ans = Number.MIN_SAFE_INTEGER;
 
 for (let y = 0; y < N; y++) {
   for (let x = 0; x < N; x++) {
-    ans = Math.max(ans, getBest(y, x, N, matrix));
+    ans = Math.max(ans, getBest(y, x));
     for (let i = 0; i < 4; i++) {
       const ny = y + dy[i];
       const nx = x + dx[i];
       if (ny >= 0 && ny < N && nx >= 0 && nx < N) {
         if (matrix[y][x] !== matrix[ny][nx]) {
           [matrix[y][x], matrix[ny][nx]] = [matrix[ny][nx], matrix[y][x]];
-          ans = Math.max(ans, getBest(y, x, N, matrix));
+          ans = Math.max(ans, getBest(y, x));
           // Swap back
           [matrix[y][x], matrix[ny][nx]] = [matrix[ny][nx], matrix[y][x]];
         }
