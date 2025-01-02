@@ -1,32 +1,34 @@
 const fs = require('fs');
 const input = fs.readFileSync(0).toString().trim().split('\n');
 const [R, C] = input[0].split(' ').map(Number);
-const dy = [-1, 1, 0, 0];
-const dx = [0, 0, -1, 1];
-const board = [];
-const visited = new Set();
-let cnt = 1;
+const board = input.slice(1);
 
-for (let i = 1; i <= R; i++) {
-  board.push(input[i].split(''));
-}
+const dy = [-1, 0, 1, 0];
+const dx = [0, 1, 0, -1];
 
-function DFS(y, x, count) {
-  cnt = Math.max(cnt, count);
+let check = Array(26).fill(false);
+let curLen = 0;
+let ans = 0;
+
+function search(y, x) {
+  if (y < 0 || x < 0 || y >= R || x >= C) return;
+  const charIndex = board[y][x].charCodeAt(0) - 'A'.charCodeAt(0);
+  if (check[charIndex]) return;
+
+  check[charIndex] = true;
+  curLen++;
+
+  ans = Math.max(ans, curLen);
 
   for (let i = 0; i < 4; i++) {
-    const ny = dy[i] + y;
-    const nx = dx[i] + x;
-    if (ny < 0 || ny >= R || nx < 0 || nx >= C) continue;
-    const next = board[ny][nx];
-    if (!visited.has(next)) {
-      visited.add(next);
-      DFS(ny, nx, count + 1);
-      visited.delete(next);
-    }
+    const ny = y + dy[i];
+    const nx = x + dx[i];
+    search(ny, nx);
   }
+
+  curLen--;
+  check[charIndex] = false;
 }
 
-visited.add(board[0][0]);
-DFS(0, 0, 1);
-console.log(cnt);
+search(0, 0);
+console.log(ans);
