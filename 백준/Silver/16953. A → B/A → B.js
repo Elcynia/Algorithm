@@ -1,28 +1,29 @@
 const fs = require('fs');
 const [A, B] = fs.readFileSync(0).toString().trim().split(' ').map(Number);
 
-const Q = [[A, 0]]; // [현재 숫자, 연산 횟수]
-const visited = new Set([A]);
+function solve(A, B) {
+  let cnt = 1;
+  let current = B;
+  while (current > A) {
+    // B가 A보다 작아지면 -1 (1 ≤ A < B ≤ 10^9)
+    if (current < A) return -1;
 
-while (Q.length) {
-  const [num, cnt] = Q.shift();
-  if (num === B) {
-    console.log(cnt + 1);
-    return;
+    // B가 홀수이고 1로 끝나지 않으면 -1
+    if (current % 2 !== 0 && current % 10 !== 1) return -1;
+
+    // 1로 끝나면 10으로 나눔
+    if (current % 10 === 1) {
+      current = Math.floor(current / 10);
+    }
+    // 짝수면 2로 나눔
+    else if (current % 2 === 0) {
+      current /= 2;
+    }
+
+    cnt++;
   }
 
-  // 2를 곱하는 경우
-  if (num * 2 <= B && !visited.has(num * 2)) {
-    Q.push([num * 2, cnt + 1]);
-    visited.add(num * 2);
-  }
-
-  // 1을 오른쪽에 추가하는 경우
-  const addNumber = num * 10 + 1;
-  if (addNumber <= B && !visited.has(addNumber)) {
-    Q.push([addNumber, cnt + 1]);
-    visited.add(addNumber);
-  }
+  return current === A ? cnt : -1;
 }
 
-console.log(-1);
+console.log(solve(A, B));
