@@ -1,0 +1,14 @@
+const fs = require('fs');
+const input = fs.readFileSync(0).toString().trim().split('\n');
+const T = +input[0];
+
+const dp = [0, 1, 1, 1, 2, 2];
+
+for (let i = 6; i <= 100; i++) {
+  dp[i] = dp[i - 5] + dp[i - 1];
+}
+
+for (let i = 1; i <= T; i++) {
+  const N = +input[i];
+  console.log(dp[N]);
+}
