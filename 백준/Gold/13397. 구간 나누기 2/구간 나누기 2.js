@@ -5,7 +5,7 @@ const [N, M] = input[0].split(' ').map(Number);
 const arr = input[1].split(' ').map(Number);
 
 let left = 0;
-let right = Math.max(...arr) - Math.min(...arr);
+let right = Math.max(...arr);
 let ans = -1;
 
 function isPossible(k) {
