@@ -12,6 +12,7 @@ for (let i = 0; i < P; i++) {
   cntDNA[arr[i]]++;
 }
 
+// 최초 탐색 (첫번째 윈도우 검사)
 if (cntDNA['A'] >= A && cntDNA['C'] >= C && cntDNA['G'] >= G && cntDNA['T'] >= T) {
   cnt++;
 }
@@ -30,3 +31,6 @@ for (let i = P; i < S; i++) {
 }
 
 console.log(cnt);
+
+// 슬라이딩 윈도우 과정 (GA -> AT(cnt++) -> TA(cnt++))
+// GA는 최초 탐색 때 검사.
