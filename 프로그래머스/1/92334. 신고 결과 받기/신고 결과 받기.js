@@ -6,7 +6,6 @@ function solution(id_list, report, k) {
     reportMap.set(id, new Set());
     countMap.set(id, 0);
   });
-
   report.forEach((r) => {
     const [reporter, reported] = r.split(' ');
     if (!reportMap.get(reporter).has(reported)) {
@@ -27,3 +26,10 @@ console.log(
     2
   )
 );
+
+/**
+ * 각 사용자가 신고한 사용자 목록, 신고당한 횟수 저장
+ * id_list를 순회하며 모든 사용자의 신고 목록과 신고 횟수를 0으로 초기화
+ * report를 순회하며 신고 체크
+ * 만약 reporter가 reported를 신고한 적이 없으면 reporter에 추가 (+ count도 +1)
+ */
