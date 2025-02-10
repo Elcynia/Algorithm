@@ -1,39 +1,27 @@
 function solution(fees, records) {
-  const parkingRecords = new Map();
-  const timeRecords = new Map();
+  const [baseTime, baseFee, unitTime, unitFee] = fees;
+  const parking = {};
+  const times = {};
 
-  const getMinutes = (time) => {
-    const [hours, minutes] = time.split(':').map(Number);
-    return hours * 60 + minutes;
-  };
+  const getMin = (t) => t.split(':').reduce((h, m) => h * 60 + +m);
 
-  // 입출차 기록 처리
   records.forEach((record) => {
-    const [time, carNum, type] = record.split(' ');
+    const [time, car, type] = record.split(' ');
     if (type === 'IN') {
-      parkingRecords.set(carNum, getMinutes(time));
+      parking[car] = getMin(time);
     } else {
-      const inTime = parkingRecords.get(carNum);
-      const duration = getMinutes(time) - inTime;
-      timeRecords.set(carNum, (timeRecords.get(carNum) || 0) + duration);
-      parkingRecords.delete(carNum);
+      times[car] = (times[car] || 0) + getMin(time) - parking[car];
+      delete parking[car];
     }
   });
 
-  // 출차 기록이 없는 차량 처리
-  parkingRecords.forEach((inTime, carNum) => {
-    const duration = getMinutes('23:59') - inTime;
-    timeRecords.set(carNum, (timeRecords.get(carNum) || 0) + duration);
+  Object.entries(parking).forEach(([car, inTime]) => {
+    times[car] = (times[car] || 0) + getMin('23:59') - inTime;
   });
 
-  // 요금 계산
-  const [baseTime, baseFee, unitTime, unitFee] = fees;
-  return [...timeRecords.entries()]
+  return Object.entries(times)
     .sort(([a], [b]) => a.localeCompare(b))
-    .map(([_, time]) => {
-      if (time <= baseTime) return baseFee;
-      return baseFee + Math.ceil((time - baseTime) / unitTime) * unitFee;
-    });
+    .map(([, t]) => baseFee + (t > baseTime ? Math.ceil((t - baseTime) / unitTime) * unitFee : 0));
 }
 
 console.log(
