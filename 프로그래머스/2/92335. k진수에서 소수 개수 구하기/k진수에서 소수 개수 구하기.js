@@ -1,12 +1,3 @@
-function convertToBase(n, k) {
-  let result = '';
-  while (n > 0) {
-    result = (n % k) + result;
-    n = Math.floor(n / k);
-  }
-  return result;
-}
-
 function isPrime(n) {
   if (n <= 1) return false;
   if (n === 2) return true;
@@ -17,8 +8,10 @@ function isPrime(n) {
 }
 
 function solution(n, k) {
-  const converted = convertToBase(n, k);
-  const numbers = converted.split('0').filter((v) => v !== '');
+  const numbers = n
+    .toString(k)
+    .split('0')
+    .filter((v) => v !== '');
   return numbers.filter((num) => isPrime(Number(num))).length;
 }
 
