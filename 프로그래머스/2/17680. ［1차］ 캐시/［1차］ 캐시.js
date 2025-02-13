@@ -1,24 +1,24 @@
 function solution(cacheSize, cities) {
   if (cacheSize === 0) return cities.length * 5;
 
-  let cache = [];
+  const cache = new Map();
   let answer = 0;
 
   cities.forEach((city) => {
     city = city.toLowerCase();
-    let idx = cache.indexOf(city);
 
-    if (idx > -1) {
+    if (cache.has(city)) {
       // cache hit
-      cache.splice(idx, 1);
-      cache.push(city);
+      cache.delete(city);
+      cache.set(city, true);
       answer += 1;
     } else {
       // cache miss
-      if (cache.length >= cacheSize) {
-        cache.shift();
+      if (cache.size >= cacheSize) {
+        const firstKey = cache.keys().next().value;
+        cache.delete(firstKey);
       }
-      cache.push(city);
+      cache.set(city, true);
       answer += 5;
     }
   });
