@@ -1,14 +1,15 @@
 function solution(clothes) {
     let answer = 1;
-    let clothesMap = new Map();
+    let clothesObj = {}
     
     for (let [name, type] of clothes) {
-        clothesMap.set(type, (clothesMap.get(type) || 0) + 1);
+        clothesObj[type] = (clothesObj[type] || 0) + 1;
     }
+    console.log(clothesObj)
 
     
-    for (let i of clothesMap.values()) {
-        answer *= (i + 1);
+    for (let i in clothesObj) {
+        answer *= (clothesObj[i] + 1);
     }
 
     return answer - 1;
