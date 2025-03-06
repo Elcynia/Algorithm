@@ -4,7 +4,7 @@ function solution(citations) {
 
     for (let i = 0; i < citations.length; i++) {
         if (citations[i] >= i + 1) {
-            answer = i + 1;
+            answer++;
         } else {
             break;
         }
