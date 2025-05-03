@@ -27,7 +27,7 @@ for (let i = 0; i < R; i++) {
 }
 
 // 물
-while (water.length > 0) {
+while (water.length) {
   const [y, x] = water.shift();
   for (let d = 0; d < 4; d++) {
     const ny = y + dy[d];
@@ -41,7 +41,7 @@ while (water.length > 0) {
 }
 
 // 고슴도치
-while (animal.length > 0) {
+while (animal.length) {
   const [y, x] = animal.shift();
   for (let d = 0; d < 4; d++) {
     const ny = y + dy[d];
