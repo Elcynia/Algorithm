@@ -1,19 +1,17 @@
 function solution(k, dungeons) {
-  let answer = -1;
-  const visited = Array(dungeons.length).fill(false);
-
-  function dfs(currentK, count) {
-    answer = Math.max(answer, count);
-    for (let i = 0; i < dungeons.length; i++) {
-      if (!visited[i] && currentK >= dungeons[i][0]) {
-        visited[i] = true;
-        dfs(currentK - dungeons[i][1], count + 1);
-        visited[i] = false;
-      }
+    let answer = -1;
+    const visited = Array(dungeons.length).fill(0);
+    
+    function DFS(k, level) {
+        answer = Math.max(answer, level);
+        for (let i = 0; i < dungeons.length; i++) {
+            if (!visited[i] && k >= dungeons[i][0]) {
+                visited[i] = 1;
+                DFS(k - dungeons[i][1], level+1);
+                visited[i] = 0;
+            }
+        }
     }
-  }
-
-  dfs(k, 0);
-
-  return answer;
+    DFS(k, 0);
+    return answer;
 }
